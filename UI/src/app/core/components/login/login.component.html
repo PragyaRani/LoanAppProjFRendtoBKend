@@ -1,0 +1,72 @@
+<div class="row justify-center">
+  <div class="col-12-sm col-6-md col-6-lg col-6-xl p-2">
+    <mat-card class="bg-primary text-white">
+      <mat-card-title>Loan Management System</mat-card-title>
+      <mat-card-content>
+        <h3>Overview</h3>
+        <p>This is a Loan Manangement System. Here USER can view loans and ADMIN can view the USERs and view/ add/ edit/
+          deactivate loans.</p>
+        <h3>Login credentials</h3>
+        <!-- <table>
+          <tr>
+            <th>USER TYPE</th>
+            <th>EMAIL</th>
+            <th>PASSWORD</th>
+          </tr>
+          <tr>
+            <td>USER</td>
+            <td>user@loanmanagementsystem.com</td>
+            <td>user@123</td>
+          </tr>
+          <tr>
+            <td>ADMIN</td>
+            <td>admin@loanmanagementsystem.com</td>
+            <td>admin@123</td>
+          </tr>
+        </table> -->
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="col-12-sm col-6-md col-6-lg col-6-xl p-2">
+    <mat-card class="bg-secondary text-black p-2">
+      <message-alert class="ml-2 mr-2" *ngIf="message.show" [show]="message.show" [message]="message.message"
+        [type]="message.type"></message-alert>
+
+      <mat-card-title class="mt-1 mb-1">Login</mat-card-title>
+      <form #loginForm="ngForm">
+        <mat-card-content>
+          <div class="col-12-sm col-12-md col-12-lg col-12-xl">
+            <mat-form-field appearance="outline">
+              <mat-label>EMAIL</mat-label>
+              <mat-icon matPrefix class="mr-1">
+                email</mat-icon>
+              <input matInput type="email" id="userName" autocomplete="off" required [(ngModel)]="payload.userName"
+                name="userName" #userName="ngModel" />
+              <mat-error *ngIf="(userName.touched || userName.dirty) && userName.invalid" class="alert alert-danger">
+                Username is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12-sm col-12-md col-12-lg col-12-xl">
+            <mat-form-field appearance="outline">
+              <mat-label>PASSWORD</mat-label>
+              <mat-icon matPrefix class="mr-1">
+                key</mat-icon>
+              <input matInput [type]="passwordVisible ? 'text': 'password'" id="password" autocomplete="off" required
+                [(ngModel)]="payload.password" name="password" #password="ngModel" />
+              <mat-icon matSuffix class="ml-1" (click)="togglePasswordVisibility()">
+                {{passwordVisible ? 'visibility_off': 'visibility'}}</mat-icon>
+              <mat-error *ngIf="(password.touched || password.dirty) && password.invalid" class="alert alert-danger">
+                Password is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="onAttemptLogin()"
+            [disabled]="!loginForm.form.valid">LOGIN</button>
+        </mat-card-actions>
+      </form>
+    </mat-card>
+  </div>
+</div>

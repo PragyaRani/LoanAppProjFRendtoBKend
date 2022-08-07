@@ -1,0 +1,22 @@
+// For more information: https://material.angular.io/guide/theming
+@use "~@angular/material" as mat;
+
+@include mat.core();
+// Available color palettes: https://material.io/design
+$loanappUI-primary: mat.define-palette(mat.$deep-purple-palette, 900);
+$loanappUI-accent: mat.define-palette(mat.$deep-purple-palette, A100);
+
+// The warn palette is optional (defaults to red).
+$loanappUI-warn: mat.define-palette(mat.$red-palette);
+
+$loanappUI-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $loanappUI-primary,
+      accent: $loanappUI-accent,
+      warn: $loanappUI-warn,
+    ),
+  )
+);
+
+@include mat.all-component-themes($loanappUI-theme);

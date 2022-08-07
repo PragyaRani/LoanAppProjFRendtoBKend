@@ -1,0 +1,96 @@
+<div class="row f-dir-col">
+  <message-alert *ngIf="message.show" class="ml-2 mr-2" [show]="message.show" [message]="message.message"
+    [type]="message.type"></message-alert>
+</div>
+<div>
+  <div>
+    <mat-card>
+      <h2>{{onEditMode ? 'Edit Loan' :'Add Loan'}}</h2>
+      <form [formGroup]="loanForm">
+        <!-- only for EDIT form -->
+        <mat-form-field appearance="outline" class="col-12-sm col-4-md col-4-lg col-4-xl p-1">
+          <mat-label>Created Date</mat-label>
+          <input matInput type="text" formControlName="creationDate" readonly id="first-name-search-control"
+            autocomplete="off" />
+        </mat-form-field>
+
+        <hr />
+
+        <h3>User Information</h3>
+
+        <mat-form-field appearance="outline" class="col-12-sm col-4-md col-4-lg col-4-xl p-1">
+          <mat-label>FIRST NAME</mat-label>
+          <input matInput type="text" formControlName="userFName" id="userFName" autocomplete="off"
+            [readonly]="onEditMode" />
+          <mat-error *ngIf="userFName?.invalid && userFName?.touched" class="alert alert-danger">
+            First name is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-12-sm col-4-md col-4-lg col-4-xl p-1">
+          <mat-label>LAST NAME</mat-label>
+          <input matInput type="text" formControlName="userLName" id="first-name-search-control" autocomplete="off"
+            [readonly]="onEditMode" />
+          <mat-error *ngIf="userLName?.invalid && userLName?.touched" class="alert alert-danger">
+            Last name is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="col-12-sm col-6-md col-6-lg col-6-xl p-1">
+          <mat-label>PROPERTY INFO</mat-label>
+          <input matInput type="text" formControlName="propertyInfo" id="first-name-search-control"
+            autocomplete="off" />
+          <mat-error *ngIf="propertyInfo?.invalid && propertyInfo?.touched" class="alert alert-danger">
+            PropertyInfo is required
+          </mat-error>
+        </mat-form-field>
+
+        <hr />
+
+        <h3>Loan Information</h3>
+
+        <mat-form-field appearance="outline" class="col-12-sm col-4-md col-4-lg col-4-xl p-1">
+          <mat-label>TYPE</mat-label>
+          <mat-select formControlName="type" name="type" required [disabled]="onEditMode">
+            <mat-option *ngFor="let loan of loanTypes" [value]="loan.label">
+              {{loan.label}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="type?.invalid && type?.touched" class="alert alert-danger">
+            Type is required
+          </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline" class="col-12-sm col-4-md col-4-lg col-4-xl p-1">
+          <mat-label>AMOUNT</mat-label>
+          <input matInput type="number" formControlName="amount" id="first-name-search-control" autocomplete="off" />
+          <mat-error *ngIf="amount?.invalid && amount?.touched" class="alert alert-danger">
+            Amount is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="col-12-sm col-4-md col-4-lg col-4-xl p-1">
+          <mat-label>TERM</mat-label>
+          <input matInput type="number" formControlName="term" id="first-name-search-control" autocomplete="off" />
+          <mat-hint align="start">In years</mat-hint>
+          <mat-error *ngIf="term?.invalid && term?.touched" class="alert alert-danger">
+            Term is required
+          </mat-error>
+          <!-- TermValidators
+                {{term?.errors?.TermValidators}} -->
+          <!-- <mat-error *ngIf="term?.errors?.TermValidators && term?.touched" class="alert alert-danger">
+                 Term Should be less or equal to 30 years
+                </mat-error> -->
+        </mat-form-field>
+
+
+
+        <div class="row justify-center mb-4">
+          <button mat-raised-button [disabled]="loanForm?.invalid" color="primary"
+            (click)="onEditMode ? onEdit(): onSubmit()">{{onEditMode ? "EDIT": "ADD"}}</button>
+          <button mat-raised-button color="secondary" (click)="onCancel()">CANCEL</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

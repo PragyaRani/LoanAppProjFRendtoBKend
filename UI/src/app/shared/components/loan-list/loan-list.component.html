@@ -1,0 +1,85 @@
+<div class="row f-dir-col">
+  <message-alert class="ml-2 mr-2" [show]="message.show" [message]="message.message" [type]="message.type">
+  </message-alert>
+</div>
+
+<div *ngIf="isAdmin" class="row justify-flex-end mr-2 mt-2">
+  <button mat-raised-button color="primary" (click)="onAddLoan()">ADD A LOAN</button>
+</div>
+<div class="row justify-center">
+  <div class="col-12-sm col-12-md col-12-lg col-12-xl p-2">
+    <mat-card>
+      <form [formGroup]="searchForm">
+        <mat-form-field appearance="outline" class="col-12-sm col-4-md col-4-lg col-4-xl">
+          <mat-label>FIRST NAME</mat-label>
+          <input matInput type="text" id="first-name-search-control" autocomplete="off"
+            formControlName="loaneeFirstName" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-12-sm col-4-md col-4-lg col-4-xl">
+          <mat-label>LAST NAME</mat-label>
+          <input matInput type="text" id="last-name-search-control" autocomplete="off"
+            formControlName="loaneeLastName" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-12-sm col-4-md col-4-lg col-4-xl">
+          <mat-label>LOAN NUMBER</mat-label>
+          <input matInput type="text" id="loan-number-search-control" autocomplete="off" formControlName="loanNumber" />
+        </mat-form-field>
+      </form>
+
+      <hr />
+
+      <table *ngIf="dataSource.length" mat-table [dataSource]="dataSource" class="mt-2 mat-elevation-z1">
+        <ng-container matColumnDef="loanNumber">
+          <th mat-header-cell *matHeaderCellDef>LOAN NUMBER</th>
+          <td mat-cell *matCellDef="let element"> {{element.loanNumber}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef>LOAN TYPE</th>
+          <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="userfname">
+          <th mat-header-cell *matHeaderCellDef>LOANEE FIRST NAME</th>
+          <td mat-cell *matCellDef="let element"> {{element.userfname}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="userlname">
+          <th mat-header-cell *matHeaderCellDef>LOANEE LAST NAME</th>
+          <td mat-cell *matCellDef="let element"> {{element.userlname}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef>AMOUNT</th>
+          <td mat-cell *matCellDef="let element"> {{element.amount  | currency:'INR'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="term">
+          <th mat-header-cell *matHeaderCellDef>TERM</th>
+          <td mat-cell *matCellDef="let element">{{element.term}} years</td>
+        </ng-container>
+
+        <ng-container matColumnDef="created">
+          <th mat-header-cell *matHeaderCellDef>CREATED</th>
+          <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+        </ng-container>
+
+        <!-- <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef>Type</th>
+          <td mat-cell *matCellDef="let element">{{element.type}}</td>
+        </ng-container> -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>ACTIONS</th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-flat-button color="secondary" aria-label="EDIT">
+              <mat-icon (click)="onModifyLoan(element.loanNumber)">edit</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+@import "./assets/scss/variables";
+
+@import "./assets/scss/base";
+@import "./assets/scss/material";
+@import "./assets/scss/breakpoints";
+@import "./assets/scss/grid";
+
+@import "./assets/scss/colours";
+
+@import "./assets/scss/utilities";
+
+div.overlay {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.8);
+
+  height: 100%;
+  width: 100%;
+
+  top: 0;
+  z-index: 10;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dot-collision {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: white;
+  color: white;
+}
+
+.dot-collision::before,
+.dot-collision::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+
+.dot-collision::before {
+  left: -10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: white;
+  color: white;
+  animation: dotCollisionBefore 2s infinite ease-in;
+}
+
+.dot-collision::after {
+  left: 10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: white;
+  color: white;
+  animation: dotCollisionAfter 2s infinite ease-in;
+  animation-delay: 1s;
+}
+
+@keyframes dotCollisionBefore {
+  0%,
+  50%,
+  75%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-15px);
+  }
+}
+
+@keyframes dotCollisionAfter {
+  0%,
+  50%,
+  75%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(15px);
+  }
+}

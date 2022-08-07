@@ -1,0 +1,10 @@
+<!-- TODO: change grid css to allow auto for col-12-.. -->
+<div *ngIf="show" [ngClass]="classPrefix + ' ' +  getAlertClass(type)"
+  style="width: auto;">
+  <ng-container *ngIf="messages && messages.length;else simpleMessage">
+    <span *ngFor="let elem of messages">{{elem}}</span>
+  </ng-container>
+  <ng-template #simpleMessage>
+    <span>{{message}}</span>
+  </ng-template>
+</div>
